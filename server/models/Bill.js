@@ -21,7 +21,7 @@ const billSchema = new Schema({
   paymentLink: {
       type: String
   },
-  paymentInfo: {
+  paymentHints: {
     type: String
   },
   autoPay: {
