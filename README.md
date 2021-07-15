@@ -7,7 +7,7 @@ As a user I want to keep track of my bills so that I can pay them on time and pr
 
 ## Description
 Clear Bill is an application designed to help users organize and view all of their outstanding bills. The app will also notify the user of upcoming & recurring payments and predict future bill amounts for payment purposes. 
- 
+
 
 ## User experience
 1. User signs up by using a form to create a new & unique account associated with their email address. 
