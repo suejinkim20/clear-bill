@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Project 3 
+Clear Bill"
+by #Group 11: Suejin, Stephanie, Taylor & Will   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## User Story
+As a user I want to keep track of my bills so that I can pay them on time and predict future bill amounts.
 
-## Available Scripts
+## Description
+Clear Bill is an application designed to help users organize and view all of their outstanding bills. The app will also notify the user of upcoming & recurring payments and predict future bill amounts for payment purposes. 
+ 
 
-In the project directory, you can run:
+## User experience
+1. User signs up by using a form to create a new & unique account associated with their email address. 
+2. User adds a secure password to protect their account. 
+3. User enters current bill amounts, due dates & schedule of recurring bills into a form. 
+4. User will receive notifications for upcoming payments due. 
 
-### `npm start`
+## Tech used in this project
+1. HTML
+2. CSS
+3. Javascript
+4. Node.js
+5. Express.js 
+6. MongoDB [Mongoose]
+8. GraphQL
+9. Bcrypt
+10. API[React-Hook-Form]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Minimum viable product
+Front end user should be able to:
+1. Sign up [create account]
+2. Log in [enter user interface]
+3. Enter bill payment data 
+4. Receive notifications of upcoming bill payments due
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Directions for Future Development
+1. Allow users to make payments withn the app
+2. Allow multiple users to share bills and split payments 
