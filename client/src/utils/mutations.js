@@ -1,0 +1,1 @@
+//user makes category choice, and we filter the data, server queries for the category (the calculation happens here on the client side)

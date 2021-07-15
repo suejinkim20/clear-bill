@@ -34,9 +34,12 @@ const resolvers = {
         removeBill: async (parent, { billId }) => {
             return Bill.findOneAndDelete({ _id: billId })
         },
-        averageBills: async () => {
+        averageBills: async (parent, { category, amount }) => {
             
-            return "TaylorsMagicCodeHere"
+            return Bill.find({category: {category}})
+        },
+        billsByCategory: async (parent, {category, amount}) => {
+            return Bill.find({category})
         },
         markBillPaid: async (parent, { billId }) => {
             return Bill.findByIdAndUpdate(
