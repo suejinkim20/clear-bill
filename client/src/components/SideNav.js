@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 import PropTypes from 'prop-types';
 import { 
     AppBar, 
@@ -65,19 +67,24 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Dashboard', 'Add a New Bill', 'Manage Bills', 'Bill Forecast'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key='dashboard' component={Link} to="/dashboard">
+          <ListItemText primary='Dashboard' />
+        </ListItem>
+        <ListItem button key='addBill' component={Link} to="/addBill">
+          <ListItemText primary='Add a New Bill' />
+        </ListItem>
+        <ListItem button key='manageBills' component={Link} to="/dashboard">
+          <ListItemText primary='Manage Bills' />
+        </ListItem>
+        <ListItem button key='billForecast' component={Link} to="/billForecast">
+          <ListItemText primary='Bill Forecast' />
+        </ListItem>
       </List>
       <Divider />
       <List>
-        {['Log Out'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key='logout' component={Link} to="/logout">
+          <ListItemText primary='Log Out' />
+        </ListItem>
       </List>
     </div>
   );
@@ -136,8 +143,6 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        
-        
         
       </main>
     </div>

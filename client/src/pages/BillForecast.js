@@ -6,6 +6,7 @@ export default function BillForecast () {
         <div>
             <h1>Bill Forecast</h1>
             <CategoryField />
+            <p>component that does calculation, maybe put it in a card to make it look nice?</p>
         </div>
     )
 }
