@@ -6,7 +6,7 @@ const resolvers = {
     Query: {
         user: async (parent, args, context) => {
             if (context.user) {
-              const user = await User.findById(context.user.id)
+              const user = await User.findById(context.user.id).populate('bills')
               return user;
             }
       
@@ -14,9 +14,7 @@ const resolvers = {
         },
         bill: async (parent, { id }, context) => {
             if (context.user) {
-                const user = await User.findById(context.user.id).populate({
-                    path: 'bills'
-                })
+                const user = await User.findById(context.user.id).populate('bills')
                 
                 return user.bills.id(id)
 
@@ -34,9 +32,12 @@ const resolvers = {
         removeBill: async (parent, { billId }) => {
             return Bill.findOneAndDelete({ _id: billId })
         },
-        averageBills: async () => {
+        averageBills: async (parent, { category, amount }) => {
             
-            return "TaylorsMagicCodeHere"
+            return Bill.find({category: {category}})
+        },
+        billsByCategory: async (parent, {category, amount}) => {
+            return Bill.find({category})
         },
         markBillPaid: async (parent, { billId }) => {
             return Bill.findByIdAndUpdate(

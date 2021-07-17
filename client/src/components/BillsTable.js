@@ -22,17 +22,17 @@ const useRowStyles = makeStyles({
     '& > *': {
       borderBottom: 'unset',
     },
+    
   },
+
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(name, calories, fat, carbs,) {
   return {
     name,
     calories,
     fat,
     carbs,
-    protein,
-    price,
     history: [
       { date: '2020-01-05', customerId: '11091700', amount: 3 },
       { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
@@ -119,11 +119,11 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData('Electricity/Utility', 8, 100, 24, 4.0, 3.99),
-  createData('Cell Phone', 237, 9.0, 37, 4.3, 4.99),
-  createData('Water/Utility', 262, 16.0, 24, 6.0, 3.79),
-  createData('Internet/Cable', 305, 3.7, 67, 4.3, 2.5),
-  createData('Car Insurance', 356, 16.0, 49, 3.9, 1.5),
+  createData('Electricity/Utility', 8, 100, 24),
+  createData('Cell Phone', 237, 9.0, 37),
+  createData('Water/Utility', 262, 16.0, 9),
+  createData('Internet/Cable', 305, 3.7, 67),
+  createData('Car Insurance', 356, 16.0, 49),
 ];
 
 export default function BillsTable() {
@@ -137,7 +137,6 @@ export default function BillsTable() {
             <TableCell align="right">Due Date</TableCell>
             <TableCell align="right">Amount</TableCell>
             <TableCell align="right">Paid Status</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
