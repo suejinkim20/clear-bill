@@ -28,24 +28,12 @@ const useRowStyles = makeStyles({
 
 });
 
-function createData(name, calories, fat, carbs,) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    history: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
-  };
-}
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-
+  console.log(billsData)
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -57,10 +45,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.category}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.dueDate}</TableCell>
+        <TableCell align="right">{row.amount}</TableCell>
+        <TableCell align="right">{row.paymentStatus}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -72,25 +59,25 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Company/Description</TableCell>
+                    <TableCell>Payment Link</TableCell>
+                    <TableCell align="right">Payment Hints</TableCell>
+                    <TableCell align="right">AutoPay?</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                    <TableRow key={row.category}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {row.description}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
+                      <TableCell>{row.paymentLink}</TableCell>
+                      <TableCell align="right">{row.paymentHints}</TableCell>
                       <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                        {useRowStyles.amount}
                       </TableCell>
                     </TableRow>
-                  ))}
+                    
+
                 </TableBody>
               </Table>
             </Box>
@@ -117,6 +104,7 @@ Row.propTypes = {
 
 
 export default function BillsTable() {
+  
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
