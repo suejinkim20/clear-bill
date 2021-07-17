@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link'
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -70,7 +71,7 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {row.description}
                       </TableCell>
-                      <TableCell>{row.paymentLink}</TableCell>
+                      <TableCell><Link href={row.paymentLink} target="_blank">{row.paymentLink}</Link></TableCell>
                       <TableCell align="right">{row.paymentHints}</TableCell>
                       <TableCell align="right">
                         {useRowStyles.amount}

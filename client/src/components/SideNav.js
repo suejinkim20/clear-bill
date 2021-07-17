@@ -82,7 +82,7 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button key='logout' component={Link} to="/logout">
+        <ListItem button key='logout' component={Link} to="/">
           <ListItemText primary='Log Out' />
         </ListItem>
       </List>
@@ -142,7 +142,9 @@ function ResponsiveDrawer(props) {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div>
+          
+        </div>
         
       </main>
     </div>
