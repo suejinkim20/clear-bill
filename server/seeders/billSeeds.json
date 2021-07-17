@@ -1,3 +1,253 @@
 [
-   
+    {
+        "category": "phone bill",
+        "description": "Verison",
+        "dueDate": "2020-08-15",
+        "amount": "80.50",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My pet's name",
+        "autoPay": true,
+        "payementStatus": true
+    },
+    {
+        "category": "car payment",
+        "description": "Wells Fargo",
+        "dueDate": "2020-08-17",
+        "amount": "212.05",
+        "paymentLink": "www.wellsfargo.com",
+        "paymentHints": "My birthday.",
+        "autoPay": false,
+        "payementStatus": false
+    },
+    {
+        "category": "electricity",
+        "description": "Duke Energy",
+        "dueDate": "2020-08-01",
+        "amount": "61.20",
+        "paymentLink": "www.duke-energy.com",
+        "paymentHints": "Year of birth.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "internet",
+        "description": "Verison",
+        "dueDate": "2020-08-02",
+        "amount": "70.00",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My favorite color.",
+        "autoPay": false,
+        "payementStatus": true
+    },
+    {
+        "category": "student loan",
+        "description": "Sallie Mae",
+        "dueDate": "2020-08-07",
+        "amount": "180.85",
+        "paymentLink": "www.salliemae.com",
+        "paymentHints": "My fav color.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "phone bill",
+        "description": "Verison",
+        "dueDate": "2020-09-15",
+        "amount": "79.15",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My pet's name",
+        "autoPay": true,
+        "payementStatus": true
+    },
+    {
+        "category": "car payment",
+        "description": "Wells Fargo",
+        "dueDate": "2020-09-17",
+        "amount": "212.05",
+        "paymentLink": "www.wellsfargo.com",
+        "paymentHints": "My birthday.",
+        "autoPay": false,
+        "payementStatus": false
+    },
+    {
+        "category": "electricity",
+        "description": "Duke Energy",
+        "dueDate": "2020-09-01",
+        "amount": "72.15",
+        "paymentLink": "www.duke-energy.com",
+        "paymentHints": "Year of birth.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "internet",
+        "description": "Verison",
+        "dueDate": "2020-09-02",
+        "amount": "70.00",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My favorite color.",
+        "autoPay": false,
+        "payementStatus": true
+    },
+    {
+        "category": "student loan",
+        "description": "Sallie Mae",
+        "dueDate": "2020-09-07",
+        "amount": "180.85",
+        "paymentLink": "www.salliemae.com",
+        "paymentHints": "My fav color.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "phone bill",
+        "description": "Verison",
+        "dueDate": "2020-10-15",
+        "amount": "68.45",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My pet's name",
+        "autoPay": true,
+        "payementStatus": true
+    },
+    {
+        "category": "car payment",
+        "description": "Wells Fargo",
+        "dueDate": "2020-10-17",
+        "amount": "210.45",
+        "paymentLink": "www.wellsfargo.com",
+        "paymentHints": "My birthday.",
+        "autoPay": false,
+        "payementStatus": false
+    },
+    {
+        "category": "electricity",
+        "description": "Duke Energy",
+        "dueDate": "2020-10-01",
+        "amount": "91.25",
+        "paymentLink": "www.duke-energy.com",
+        "paymentHints": "Year of birth.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "internet",
+        "description": "Verison",
+        "dueDate": "2020-10-02",
+        "amount": "70.00",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My favorite color.",
+        "autoPay": false,
+        "payementStatus": true
+    },
+    {
+        "category": "student loan",
+        "description": "Sallie Mae",
+        "dueDate": "2020-10-07",
+        "amount": "180.85",
+        "paymentLink": "www.salliemae.com",
+        "paymentHints": "My fav color.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    
+    {
+        "category": "phone bill",
+        "description": "Verison",
+        "dueDate": "2020-11-15",
+        "amount": "71.23",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My pet's name",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "car payment",
+        "description": "Wells Fargo",
+        "dueDate": "2020-11-17",
+        "amount": "210.45",
+        "paymentLink": "www.wellsfargo.com",
+        "paymentHints": "My birthday.",
+        "autoPay": false,
+        "payementStatus": false
+    },
+    {
+        "category": "electricity",
+        "description": "Duke Energy",
+        "dueDate": "2020-11-01",
+        "amount": "101.43",
+        "paymentLink": "www.duke-energy.com",
+        "paymentHints": "Year of birth.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "internet",
+        "description": "Verison",
+        "dueDate": "2020-11-02",
+        "amount": "70.00",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My favorite color.",
+        "autoPay": false,
+        "payementStatus": true
+    },
+    {
+        "category": "student loan",
+        "description": "Sallie Mae",
+        "dueDate": "2020-11-07",
+        "amount": "180.85",
+        "paymentLink": "www.salliemae.com",
+        "paymentHints": "My fav color.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "phone bill",
+        "description": "Verison",
+        "dueDate": "2020-12-15",
+        "amount": "67.89",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My pet's name",
+        "autoPay": true,
+        "payementStatus": true
+    },
+    {
+        "category": "car payment",
+        "description": "Wells Fargo",
+        "dueDate": "2020-12-17",
+        "amount": "210.45",
+        "paymentLink": "www.wellsfargo.com",
+        "paymentHints": "My birthday.",
+        "autoPay": false,
+        "payementStatus": false
+    },
+    {
+        "category": "electricity",
+        "description": "Duke Energy",
+        "dueDate": "2020-12-01",
+        "amount": "114.01",
+        "paymentLink": "www.duke-energy.com",
+        "paymentHints": "Year of birth.",
+        "autoPay": true,
+        "payementStatus": false
+    },
+    {
+        "category": "internet",
+        "description": "Verison",
+        "dueDate": "2020-12-02",
+        "amount": "70.00",
+        "paymentLink": "www.verison.com",
+        "paymentHints": "My favorite color.",
+        "autoPay": false,
+        "payementStatus": true
+    },
+    {
+        "category": "student loan",
+        "description": "Sallie Mae",
+        "dueDate": "2020-12-07",
+        "amount": "180.85",
+        "paymentLink": "www.salliemae.com",
+        "paymentHints": "My fav color.",
+        "autoPay": true,
+        "payementStatus": false
+    }
 ]
