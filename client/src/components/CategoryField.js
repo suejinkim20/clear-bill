@@ -53,11 +53,11 @@ export default function CategoryField({setCategory, setBillObject }) {
           label="Category"
         >
           <MenuItem value=""><em>Select Category</em></MenuItem>
-          <MenuItem value="electric">Electric/Utility</MenuItem>
-          <MenuItem value="water">Water/Utility</MenuItem>
-          <MenuItem value="car">Car Payment</MenuItem>
-          <MenuItem value="phone">Cell Phone</MenuItem>
-          <MenuItem value="internet">Internet</MenuItem>
+          <MenuItem value="Electric">Electric/Utility</MenuItem>
+          <MenuItem value="Water">Water/Utility</MenuItem>
+          <MenuItem value="Car Payment">Car Payment</MenuItem>
+          <MenuItem value="Cell Phone">Cell Phone</MenuItem>
+          <MenuItem value="Internet">Internet</MenuItem>
         </Select>
       </FormControl>
 

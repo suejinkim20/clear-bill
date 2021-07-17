@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddBill from './pages/AddBill'
+import BillForecast from './pages/BillForecast'
 // Components
 import Nav from './components/Nav';
 import Layout from './components/Layout'
@@ -15,7 +16,7 @@ function App() {
   return (
       <Router>
         <Nav />
-        <Layout>
+        
           <Switch>
             <Route exact path="/">
               <Home />
@@ -26,14 +27,21 @@ function App() {
             <Route path="/signup">
               <SignUp />
             </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/addBill">
-              <AddBill />
-            </Route>
+            <Layout>
+              <Switch>
+                <Route path="/dashboard">
+                  <Dashboard />
+                </Route>
+                <Route path="/addBill">
+                  <AddBill />
+                </Route>
+                <Route path="/billforecast">
+                  <BillForecast />
+                </Route>
+              </Switch>
+            </Layout>
           </Switch>
-        </Layout>
+        
       </Router>
       
   );
