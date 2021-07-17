@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
-const Bill = reqire('./bill')
 
 const userSchema = new Schema({
       email: {
@@ -13,7 +12,12 @@ const userSchema = new Schema({
         required: true,
         minlength: 5
       },
-      bills: [Bill.schema]
+      bills: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Bill'
+        }
+      ]
 });
 
 // set up pre-save middleware to create password
@@ -31,6 +35,6 @@ userSchema.pre('save', async function(next) {
     return await bcrypt.compare(password, this.password);
   };
   
-  const User = mongoose.model('User', userSchema);
+  const User = model('User', userSchema);
   
   module.exports = User;

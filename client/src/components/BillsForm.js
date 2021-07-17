@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import Button from '@material-ui/core/Button'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,42 +39,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function BillsForm() {
+export default function BillsForm({billObject}) {
   const classes = useStyles();
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
+         <FormControl>
+          <TextField id="standard" label="Description" defaultValue={billObject[0].description} helperText="i.e. Company Name, Account Name"/>
+        </FormControl>
+        
         <FormControl>
-          <TextField id="standard" label="Description" defaultValue="" helperText="i.e. Company Name, Account Name"/>
+          <form className={classes.container} noValidate>
+            <TextField
+              id="date"
+              label="Due Date"
+              type="date"
+              defaultValue={billObject[0].dueDate}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </form>
         </FormControl>
 
         <FormControl>
-        <form className={classes.container} noValidate>
-          <TextField
-            id="date"
-            label="Due Date"
-            type="date"
-            defaultValue="2020-07-15"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </form>
-
+          <TextField id="standard" label="Amount Due" defaultValue={billObject[0].amount} />
         </FormControl>
 
         <FormControl>
-          <TextField id="standard" label="Amount Due" defaultValue="" />
+          <TextField id="standard" label="Payment Link" defaultValue={billObject[0].paymentLink}/>
         </FormControl>
 
         <FormControl>
-          <TextField id="standard" label="Payment Link" defaultValue=""/>
-        </FormControl>
-
-        <FormControl>
-          <TextField id="standard" label="Payment Hints" defaultValue="" helperText="i.e. Associated Payment Account, Log In Hints"/>
+          <TextField id="standard" label="Payment Hints" defaultValue={billObject[0].paymentHints} helperText="i.e. Associated Payment Account, Log In Hints"/>
         </FormControl>
 
         <FormControl variant="outlined" className={classes.formControl}>
@@ -98,6 +97,7 @@ export default function BillsForm() {
           <MenuItem value="true">Paid</MenuItem>
         </Select>
       </FormControl>
+      <Button variant="contained">Add Bill</Button>
 
 
       </div>
