@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import billsData from '../mockdata'
 
 const useRowStyles = makeStyles({
   root: {
@@ -54,7 +55,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.category}
         </TableCell>
         <TableCell align="right">{row.calories}</TableCell>
         <TableCell align="right">{row.fat}</TableCell>
@@ -102,29 +103,18 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    dueDate: PropTypes.string,
+    amount: PropTypes.number,
+    paymentLink: PropTypes.string,
+    paymentHints: PropTypes.string,
+    autoPay: PropTypes.bool,
+    paymentStatus: PropTypes.bool,
+  }),
 };
 
-const rows = [
-  createData('Electricity/Utility', 8, 100, 24),
-  createData('Cell Phone', 237, 9.0, 37),
-  createData('Water/Utility', 262, 16.0, 9),
-  createData('Internet/Cable', 305, 3.7, 67),
-  createData('Car Insurance', 356, 16.0, 49),
-];
+
 
 export default function BillsTable() {
   return (
@@ -140,7 +130,7 @@ export default function BillsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {billsData.map((row) => (
             <Row key={row.name} row={row} />
           ))}
         </TableBody>

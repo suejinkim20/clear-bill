@@ -12,8 +12,8 @@ const typeDefs = gql`
     _id: ID
     category: String
     description: String
-    dueDate: Number
-    amount: Number
+    dueDate: Int
+    amount: Int
     paymentLink: String
     paymentHints: String
     autoPay: Boolean
@@ -21,11 +21,13 @@ const typeDefs = gql`
 }
 
   type Query {
-    bills: [Bill]!
-    bill(billId: ID!): Bill
+    users: [User]
+    user(username: String!): User
   }
 
   type Mutation {
+    login(email: String!, password: String!): User
+
   }
 `;
 
