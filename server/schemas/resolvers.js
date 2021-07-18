@@ -32,40 +32,37 @@ const resolvers = {
         addBill: async (parent, { category, description, dueDate, amount, paymentLink, paymentHints, autoPay, paymentStatus }) => {
             return Bill.create({ category, description, dueDate, amount, paymentLink, paymentHints, autoPay, paymentStatus })
         },
-        removeBill: async (parent, { billId }) => {
-            return Bill.findOneAndDelete({ _id: billId })
-        },
-        averageBills: async (parent, { category, amount }) => {
+        // removeBill: async (parent, { billId }) => {
+        //     return Bill.findOneAndDelete({ _id: billId })
+        // },
+        // averageBills: async (parent, { category, amount }) => {
             
-            return Bill.find({category: {category}})
-        },
-        billsByCategory: async (parent, {category, amount}) => {
-            return Bill.find({category})
-        },
-        markBillPaid: async (parent, { billId }) => {
-            return Bill.findByIdAndUpdate(
-                { _id: billId },
-                { new: true }
-                )
-        },
-        login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
+        //     return Bill.find({category: {category}})
+        // },
+        // billsByCategory: async (parent, {category, amount}) => {
+        //     return Bill.find({category})
+        // },
+        // markBillPaid: async (parent, { billId }) => {
+        //     return Bill.findByIdAndUpdate(
+        //         { _id: billId },
+        //         { new: true }
+        //         )
+        // },
+        // login: async (parent, { email, password }) => {
+        //     const user = await User.findOne({ email });
+        //     if (!user) {
+        //       throw new AuthenticationError('Incorrect credentials');
+        //     }
+        //     const correctPw = await user.isCorrectPassword(password);
+        //     if (!correctPw) {
+        //       throw new AuthenticationError('Incorrect credentials');
+        //     }
+        //     const token = signToken(user);
       
-            if (!user) {
-              throw new AuthenticationError('Incorrect credentials');
-            }
-      
-            const correctPw = await user.isCorrectPassword(password);
-      
-            if (!correctPw) {
-              throw new AuthenticationError('Incorrect credentials');
-            }
-      
-            const token = signToken(user);
-      
-            return { token, user };
-          },
+        //     return { token, user };
+        //   },
     
       
     }
 }
+module.exports = resolvers;

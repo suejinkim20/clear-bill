@@ -12,8 +12,8 @@ const typeDefs = gql`
     _id: ID
     category: String
     description: String
-    dueDate: Int
-    amount: Int
+    dueDate: String
+    amount: Float
     paymentLink: String
     paymentHints: String
     autoPay: Boolean
@@ -26,7 +26,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addBill(category: String, description: String, dueDate: String, amount: Int, paymentLink: String, paymentHints: String, autoPay: Boolean, paymentStatus: Boolean): Bill
+    addBill(category: String, description: String, dueDate: String, amount: Float, paymentLink: String, paymentHints: String, autoPay: Boolean, paymentStatus: Boolean): Bill
   }
 `;
 
