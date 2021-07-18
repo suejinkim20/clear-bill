@@ -1,6 +1,14 @@
 [
    {
-      "email": "testemail@email.com",
+      "email": "responsibleAdult@email.com",
+      "password": "12345"
+   },
+   {
+      "email": "justGettingBy@email.com",
+      "password": "12345"
+   },
+   {
+      "email": "alwaysLate@email.com",
       "password": "12345"
    }
 ]
