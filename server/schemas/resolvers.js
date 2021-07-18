@@ -4,23 +4,26 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
     Query: {
-        user: async (parent, args, context) => {
-            if (context.user) {
-              const user = await User.findById(context.user.id).populate('bills')
-              return user;
-            }
+        // user: async (parent, args, context) => {
+        //     if (context.user) {
+        //       const user = await User.findById(context.user.id).populate('bills')
+        //       return user;
+        //     }
       
-            throw new AuthenticationError('Not logged in');
+        //     throw new AuthenticationError('Not logged in');
+        // },
+        users: async () => {
+            return await User.find({}).populate('bills')
         },
-        bill: async (parent, { id }, context) => {
-            if (context.user) {
-                const user = await User.findById(context.user.id).populate('bills')
+        // bill: async (parent, { id }, context) => {
+        //     if (context.user) {
+        //         const user = await User.findById(context.user.id).populate('bills')
                 
-                return user.bills.id(id)
+        //         return user.bills.id(id)
 
-            }
-            throw new AuthenticationError('Not logged in');
-        },
+        //     }
+        //     throw new AuthenticationError('Not logged in');
+        // },
         bills: async () => {
             return Bill.find().sort({ dueDate: -1})
         }

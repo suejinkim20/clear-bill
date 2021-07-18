@@ -22,12 +22,11 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(email: String!): User
+    bills: [Bill]
   }
 
   type Mutation {
-    login(email: String!, password: String!): User
-
+    addBill(category: String, description: String, dueDate: String, amount: Int, paymentLink: String, paymentHints: String, autoPay: Boolean, paymentStatus: Boolean): Bill
   }
 `;
 

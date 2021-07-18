@@ -1,6 +1,6 @@
 const bills = [
     {
-        category: "phone",
+        category: "Cell Phone",
         description: "Verizon",
         dueDate: "2020-08-15",
         amount: "80.50",
@@ -10,7 +10,7 @@ const bills = [
         paymentStatus: true
     },
     {
-        category: "electric",
+        category: "Electric",
         description: "Duke Energy",
         dueDate: "2020-08-01",
         amount: "61.20",
@@ -20,7 +20,7 @@ const bills = [
         paymentStatus: false
     },
     {
-        category: "water",
+        category: "Water",
         description: "Town of Raleigh",
         dueDate: "2020-08-01",
         amount: "61.20",
@@ -30,7 +30,7 @@ const bills = [
         paymentStatus: false
     },
     {
-        category: "internet",
+        category: "Internet",
         description: "Comcast",
         dueDate: "2020-08-02",
         amount: "70.00",
@@ -40,7 +40,7 @@ const bills = [
         paymentStatus: true
     },
     {
-        category: "car",
+        category: "Car Payment",
         description: "Wells Fargo",
         dueDate: "2020-08-17",
         amount: "212.05",
