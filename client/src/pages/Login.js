@@ -27,9 +27,7 @@ const useStyles = makeStyles({
         width: '350px',
         textAlign: 'center'
     }
-})
-
-    
+})   
 
 export default function Login(props) {
   const classes = useStyles();
@@ -57,6 +55,7 @@ export default function Login(props) {
         });
   
         Auth.login(data.login.token);
+        console.log('form submitted')
       } catch (e) {
         console.error(e);
       }
@@ -105,7 +104,7 @@ export default function Login(props) {
                 <br></br>
                 <br></br>
                 <p>Don't have an account? Sign Up Here</p>
-                <Button variant="contained">Sign Up</Button>
+                <Button variant="contained" href='/signup'>Sign Up</Button>
             </Box>
         </Card>
     </Container>

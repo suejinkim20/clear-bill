@@ -5,8 +5,8 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 // Pages
 import Home from './pages/Home';
@@ -20,7 +20,7 @@ import BillForecast from './pages/BillForecast';
 import Nav from './components/Nav';
 import Layout from './components/Layout';
 
-//set up http link with graphql
+// Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
