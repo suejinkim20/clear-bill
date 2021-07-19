@@ -4,7 +4,7 @@ by #Group 11: Suejin, Stephanie, Taylor & Will
 ## User Story
 As a user I want to keep track of my bills so that I can pay them on time and predict future bill amounts.
 ## Description
-Clear Bill is an application designed to help users organize and view all of their outstanding bills. The app will also notify the user of upcoming & recurring payments and predict future bill amounts for payment purposes.
+Clear Bill is an application designed to help users organize and view all of their outstanding bills, amounts, and due dates.
 
 GitHub Repository: https://github.com/snbarnhouse/mvp_bill_tracker 
 
