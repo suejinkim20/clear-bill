@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+import Auth from '../utils/auth';
+
 import PropTypes from 'prop-types';
 import { 
     AppBar, 
@@ -62,6 +64,11 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -82,7 +89,7 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button key='logout' component={Link} to="/">
+        <ListItem button key='logout' component={Link} to="/" onClick={logout}>
           <ListItemText primary='Log Out' />
         </ListItem>
       </List>
