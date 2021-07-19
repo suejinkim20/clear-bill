@@ -29,7 +29,7 @@ mutation removeBill($billId: Int!) {
 export const BILLS_BY_CATEGORY = gql`
 mutation billsByCategory($category: String!, $amount: Float!) {
     billsByCategory(category: $category, amount: $amount) {
-    __id
+    _id
     category
     amount
     }
@@ -39,15 +39,15 @@ mutation billsByCategory($category: String!, $amount: Float!) {
 export const MARK_BILL_PAID = gql`
 mutation markBillPaid($billId: Int!) {
     markBillPaid(billId: $billId) {
-    __id
+    _id
     billId
     }
 }
 `;
 
 export const ADD_USER = gql`
-mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+mutation addUser($email: String!, $password: String!) {
+    addUser(email: $email, password: $password) {
     token
         user {
             _id
