@@ -1,13 +1,19 @@
 import React from 'react';
-import Button from '@material-ui/core/Button'
 import SideNav from '../components/SideNav'
 import CategoryField from '../components/CategoryField';
 import BillsForm from '../components/BillsForm';
+import { Redirect } from 'react-router-dom'
+import Auth from '../utils/auth'
+
 
 export default function AddBill() {
     const [category, setCategory] = React.useState('');
-    const [billObject, setBillObject] = React.useState('electric')
+    const [billObject, setBillObject] = React.useState('')
 
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if(!token){
+      return <Redirect to="/login" />;
+    }
 
     return (
         <div>
@@ -15,7 +21,7 @@ export default function AddBill() {
             <div>
                 <SideNav />
                 <CategoryField setCategory={setCategory} setBillObject={setBillObject}/>
-                <BillsForm billObject={billObject} category={category}/>
+                <BillsForm category={category} billObject={billObject} />
             </div>
         </div>
     )

@@ -1,22 +1,55 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 
 // Pages
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import AddBill from './pages/AddBill'
-import BillForecast from './pages/BillForecast'
+import AddBill from './pages/AddBill';
+import BillForecast from './pages/BillForecast';
+
 // Components
 import Nav from './components/Nav';
-import Layout from './components/Layout'
+import Layout from './components/Layout';
+
+//set up http link with graphql
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  uri: '/graphql',
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
+    <ApolloProvider client={client}>
       <Router>
         <Nav />
-        
           <Switch>
             <Route exact path="/">
               <Home />
@@ -41,9 +74,8 @@ function App() {
               </Switch>
             </Layout>
           </Switch>
-        
       </Router>
-      
+    </ApolloProvider>
   );
 }
 

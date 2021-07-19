@@ -7,10 +7,6 @@ import Select from '@material-ui/core/Select';
 
 import billsData from '../mockdata'
 
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Button from '@material-ui/core/Button'
-
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,7 +25,7 @@ export default function CategoryField({setCategory, setBillObject }) {
     let selectedCategory = category
 
     const dataOutput = data.filter(function(bill) {
-        return bill.category == selectedCategory
+        return bill.category === selectedCategory
     })
     console.log(dataOutput)
 

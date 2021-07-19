@@ -7,7 +7,7 @@ export default function SignUp() {
         <div>
         <br></br>
         <br></br>
-        <Container maxWidth="sm" style={{border: '1px solid'}}><h1 style={{textAlign: "center"}} >Please Sign Up Below:</h1>
+        <Container maxWidth="sm" styles={{border: '1px solid'}}><h1 styles={{textAlign: "center"}} >Please Sign Up Below:</h1>
         <Box component="span" label="Login" m={1}>                
         <form noValidate autoComplete="off">
             <TextField id="outlined-basic" label="Email" variant="outlined" />
