@@ -89,7 +89,7 @@ export default function BillsForm({billObject, category}) {
                 <TextField id="standard" label="Payment Hints" defaultValue={billObject[0].paymentHints || ''} helperText="i.e. Associated Payment Account, Log In Hints"/>
               </FormControl>
 
-              <FormControl variant="outlined" className={classes.formControl} key={billObject[0].AutoPay}>
+              <FormControl variant="outlined" className={classes.formControl} key={billObject[0].autoPay}>
               <InputLabel id="demo-simple-select-outlined-label">AutoPay</InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
@@ -100,7 +100,7 @@ export default function BillsForm({billObject, category}) {
               </Select>
             </FormControl>
 
-              <FormControl variant="outlined" className={classes.formControl}>
+              <FormControl variant="outlined" className={classes.formControl} key={billObject[0].paymentStatus}>
               <InputLabel id="demo-simple-select-outlined-label">Payment Status</InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
