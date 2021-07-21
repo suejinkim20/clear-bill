@@ -1,27 +1,27 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-  query user($email: String!) {
-    user(email: $email) {
+  query user($profileId: ID) {
+    user(profileId: $profileId) {
       _id
       email
       bills {
         _id
-        category: String
-        description: String
-        dueDate: String
-        amount: Float
-        paymentLink: String
-        paymentHints: String
-        autoPay: Boolean
-        paymentStatus: Boolean
+        category
+        description
+        dueDate
+        amount
+        paymentLink
+        paymentHints
+        autoPay
+        paymentStatus
       }
     }
   }
 `;
 
 export const QUERY_BILLS = gql`
-  query getBills {
+  query bills {
     bills {
         _id: ID
         category: String
@@ -37,7 +37,7 @@ export const QUERY_BILLS = gql`
 `;
 
 export const QUERY_SINGLE_BILL = gql`
-  query getSingleBill($billId: ID!) {
+  query bill($billId: ID!) {
     bill(billId: $billId) {
         _id: ID
         category: String
@@ -50,5 +50,4 @@ export const QUERY_SINGLE_BILL = gql`
         paymentStatus: Boolean
       }
     }
-  }
 `;

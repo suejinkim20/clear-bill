@@ -38,7 +38,6 @@ export default function Login(props) {
     // update state based on form input changes
     const handleChange = (event) => {
       const { name, value } = event.target;
-  
       setFormState({
         ...formState,
         [name]: value,
@@ -55,7 +54,6 @@ export default function Login(props) {
         });
   
         Auth.login(data.login.token);
-        console.log('form submitted')
       } catch (e) {
         console.error(e);
       }

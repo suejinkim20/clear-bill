@@ -1,7 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,11 +16,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link'
-
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import billsData from '../mockdata'
 
+import mockBills from '../mockdata';
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -34,9 +35,9 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  console.log(billsData)
+
   return (
-    <React.Fragment>
+    <React.Fragment key={row.email}>
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -75,10 +76,9 @@ function Row(props) {
                       <TableCell align="right">{row.paymentHints}</TableCell>
                       <TableCell align="right">
                         {useRowStyles.amount}
+                        {row.autoPay}
                       </TableCell>
                     </TableRow>
-                    
-
                 </TableBody>
               </Table>
             </Box>
@@ -89,41 +89,33 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    category: PropTypes.string,
-    description: PropTypes.string,
-    dueDate: PropTypes.string,
-    amount: PropTypes.number,
-    paymentLink: PropTypes.string,
-    paymentHints: PropTypes.string,
-    autoPay: PropTypes.bool,
-    paymentStatus: PropTypes.bool,
-  }),
-};
 
-
-
-export default function BillsTable() {
-  
+export default function BillsTable(userData) {
+console.log(userData)
+const userBills = userData.userData.bills
+console.log(userBills)
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Bills</TableCell>
-            <TableCell align="right">Due Date</TableCell>
-            <TableCell align="right">Amount</TableCell>
-            <TableCell align="right">Paid Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {billsData.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell>Bills</TableCell>
+                    <TableCell align="right">Due Date</TableCell>
+                    <TableCell align="right">Amount</TableCell>
+                    <TableCell align="right">Paid Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {userBills.map((row) => (
+                    <Row key={row.name} row={row} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          
+    </div>
   );
 }

@@ -80,9 +80,9 @@ function ResponsiveDrawer(props) {
         <ListItem button key='addBill' component={Link} to="/addBill">
           <ListItemText primary='Add a New Bill' />
         </ListItem>
-        <ListItem button key='manageBills' component={Link} to="/dashboard">
+        {/* <ListItem button key='manageBills' component={Link} to="/dashboard">
           <ListItemText primary='Manage Bills' />
-        </ListItem>
+        </ListItem> */}
         <ListItem button key='billForecast' component={Link} to="/billForecast">
           <ListItemText primary='Bill Forecast' />
         </ListItem>

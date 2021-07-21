@@ -3,21 +3,35 @@ import BillsTable from '../components/BillsTable'
 import SideNav from '../components/SideNav'
 import { Redirect } from 'react-router-dom'
 import Auth from '../utils/auth'
+import { QUERY_USER } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 
 export default function Dashboard() {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const { data: userData } = Auth.getProfile()
+
+    const {loading, data} = useQuery(QUERY_USER,
+        { variables: { profileId: userData._id },
+    });
+
+    const profile = data?.user || {};
+
     if(!token){
-      return <Redirect to="/" />;
+      return <Redirect to="/login" />;
     }
     
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
     return (
         <div>
             <h1>Dashboard Page</h1>
             <div>
                 <SideNav />
                 <h2>Bills Table</h2>
-                <BillsTable />
+                <BillsTable userData={profile}/>
             </div>
         </div>
     )
