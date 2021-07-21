@@ -34,7 +34,7 @@ export default function Home() {
             <Container maxWidth="md">
                 <Card className={classes.card}>
                     <h1 className={classes.title} >Welcome to Clear Bill</h1>
-                    <p className={classes.para}>Clear Bill is a simple, easy to use bill tracking application. Please login and proceed to your dashboard if you are a returning user. If you are a new user, please click the signup button and enter your email address and create a password. Once logged in you will have the ability to save bills, due dates, amounts, and see future bill predictions. You can also edit and delete bills as needed.</p>
+                    <p className={classes.para}>Clear Bill is a simple, easy to use bill tracking application. Please login and proceed to your dashboard if you are a returning user. If you are a new user, please click the signup button and enter your email address and create a password. Once logged in you will have the ability to save bills, due dates, and amounts.</p>
                     <p className={classes.subpara}>Happy billing!</p>
                 </Card>
             </Container>

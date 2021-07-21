@@ -183,7 +183,7 @@ export default function BillsForm({billObject, category}) {
             </Select>
           </FormControl>
 
-          <FormControl variant="outlined" className={classes.formControl} onChange={handleChange}>
+          <FormControl variant="outlined" className={classes.formControl} key={billObject[0].paymentStatus} onChange={handleChange}>
             <InputLabel id="demo-simple-select-outlined-label">Payment Status</InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
