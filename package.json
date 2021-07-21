@@ -17,6 +17,7 @@
         "concurrently": "^5.1.0"
     },
     "dependencies": {
+        "graphql": "^15.5.1",
         "mongoose": "^5.13.2"
     }
 }
