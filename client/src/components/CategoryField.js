@@ -5,8 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import billsData from '../mockdata'
-
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -18,8 +16,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategoryField({setCategory, setBillObject }) {
+export default function CategoryField({setCategory, setBillObject, userData }) {
   const classes = useStyles();
+
+  const categoryData = userData.bills.map(({ category }) => category)
+  const billsArray = userData.bills
+
+  const uniqueCategoryFunction = (a) => {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+  }
+
+  const uniqueCategory = uniqueCategoryFunction(categoryData)
+
 
   const getBillsData = (data, category) => {
     let selectedCategory = category
@@ -27,17 +38,13 @@ export default function CategoryField({setCategory, setBillObject }) {
     const dataOutput = data.filter(function(bill) {
         return bill.category === selectedCategory
     })
-    console.log(dataOutput)
-
     setBillObject(dataOutput)
   }
 
   const handleChange = (e) => {
     setCategory(e)
-    getBillsData(billsData, e)
-
+    getBillsData(billsArray, e)
   }
-
   return (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
@@ -49,15 +56,12 @@ export default function CategoryField({setCategory, setBillObject }) {
           label="Category"
         >
           <MenuItem value=""><em>Select Category</em></MenuItem>
-          <MenuItem value="Electric">Electric/Utility</MenuItem>
-          <MenuItem value="Water">Water/Utility</MenuItem>
-          <MenuItem value="Car Payment">Car Payment</MenuItem>
-          <MenuItem value="Cell Phone">Cell Phone</MenuItem>
-          <MenuItem value="Internet">Internet</MenuItem>
+          {uniqueCategory.map((catName) => (
+            <MenuItem value={catName}>{catName}</MenuItem>
+          ))}
+          <MenuItem value="">New Category...</MenuItem>
         </Select>
       </FormControl>
-
-
 
     </div>
   );

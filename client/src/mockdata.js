@@ -1,4 +1,4 @@
-const bills = [
+const mockBills = [
     {
         category: "Cell Phone",
         description: "Verizon",
@@ -51,4 +51,4 @@ const bills = [
     },
 ]
 
-export default bills
+export default mockBills

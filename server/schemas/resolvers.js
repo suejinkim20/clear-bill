@@ -4,16 +4,16 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
     Query: {
+        user: async (parent, { profileId }) => {
+            return User.findOne({ _id: profileId }).populate('bills');
+        },
         users: async () => {
             return await User.find({}).populate('bills')
-        },
-        user: async (parent, { email }) => {
-            return User.findOne({ email }).populate('bills');
         },
         bills: async () => {
             return Bill.find().sort({ dueDate: -1})
         },
-        bills: async (parent, { billId }) => {
+        bill: async (parent, { billId }) => {
             return Bill.findOne({ _id: billId });
         },
     },
