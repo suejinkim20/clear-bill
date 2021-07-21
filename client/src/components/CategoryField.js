@@ -38,6 +38,7 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
     const dataOutput = data.filter(function(bill) {
         return bill.category === selectedCategory
     })
+    // console.log(dataOutput)
     setBillObject(dataOutput)
   }
 
@@ -59,7 +60,6 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
           {uniqueCategory.map((catName) => (
             <MenuItem value={catName}>{catName}</MenuItem>
           ))}
-          <MenuItem value="">New Category...</MenuItem>
         </Select>
       </FormControl>
 

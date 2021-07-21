@@ -1,10 +1,12 @@
 import React, { useState }from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_BILL } from '../utils/mutations';
-import { QUERY_BILLS } from '../utils/queries';
+import { QUERY_BILLS, QUERY_USER } from '../utils/queries';
 
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -69,49 +71,114 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BillsForm({billObject, category}) {
   const classes = useStyles();
+  // console.log(billObject)
+  const [categoryState, setCategory] = useState('')
+  const [descriptionState, setDescription] = useState('')
+  const [dueDateState, setDueDate] = useState('')
+  const [amountState, setAmount] = useState('')
+  const [paymentLinkState, setPaymentLink] = useState('')
+  const [paymentHintsState, setPaymentHints] = useState('')
+  const [autoPayState, setAutoPay] = useState('')
+  const [paymentStatusState, setPaymentStatus] = useState('')
+  const [valueState, setValueState] = useState('');
 
-  const [formState, setFormState] = useState({ 
-    category: '',
-    description: '',
-    dueDate: '',
-    amount: '',
-    paymentLink: '',
-    paymentHints: '',
-    autoPay: '',
-    paymentStatus: ''
+  // useEffect(() => setCategory(billObject[0].category), [valueState])
+  // useEffect(() => setDescription(billObject[0].description), [valueState])
+  // useEffect(() => setDueDate(billObject[0].dueDate), [valueState])
+  // useEffect(() => setAmount(billObject[0].amount), [valueState])
+  // useEffect(() => setPaymentLink(billObject[0].paymentLink), [valueState])
+  // useEffect(() => setPaymentHints(billObject[0].paymentHints), [valueState])
+  // useEffect(() => setAutoPay(billObject[0].autoPay), [valueState])
+  // useEffect(() => setPaymentStatus(billObject[0].paymentStatus), [valueState])
+
+  const [addBill, { error, data }] = useMutation(ADD_BILL, {
+    update(cache, { data: { addBill } }) {
+      console.log(cache)
+      console.log(data)
+      try {
+        const { bills } = cache.readQuery({ query: QUERY_BILLS })
+
+        cache.writeQuery({
+          query: QUERY_BILLS,
+          data: { bills: [addBill, ...bills] },
+        })
+      } catch (error) {
+        console.error(error)
+      }
+
+      const userVariable = cache.readQuery({ query: QUERY_USER });
+      console.log(userVariable)
+      const user = userVariable.user
+      console.log(user)
+      cache.writeQuery({
+        query: QUERY_USER,
+        data: { user: { ...user, bills: [...user.bills, addBill] } },
+      });
+    }
   });
-
-  const [addBill, { error, data }] = useMutation(ADD_BILL);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault()
-    try {
-      const { data } = await addBill({
-        variables: { ...formState }
-      })
 
-      setFormState({
-        category: '',
-        description: '',
-        dueDate: '',
-        amount: '',
-        paymentLink: '',
-        paymentHints: '',
-        autoPay: '',
-        paymentStatus: ''
+    try {
+      console.log("event under handleFormSubmit", event)
+      console.log("state variables under handleFormSubmit", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+      console.log("category", categoryState)
+      const data = await addBill({
+        variables: {
+          category: categoryState, 
+          description: descriptionState, 
+          dueDate: dueDateState, 
+          amount: parseFloat(amountState), 
+          paymentLink: paymentLinkState, 
+          paymentHints: paymentHintsState, 
+          autoPay: JSON.parse(autoPayState), 
+          paymentStatus: JSON.parse(paymentStatusState)
+        }
       })
+      console.log(data)
+      console.log("after awaiting addBill", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+
+      // setCategory('')
+      // setDescription('')
+      // setDueDate('')
+      // setAmount('')
+      // setPaymentLink('')
+      // setPaymentHints('')
+      // setAutoPay('')
+      // setPaymentStatus('')
+      // setValueState('');
     } catch (error) {
       console.error(error)
     }
   }
 
   const handleChange = (event) => {
+    console.log('target changed')
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    if (name == 'category') {
+      setCategory(value)
+    } else if (name == 'description') {
+      setDescription(value)
+    } else if (name == 'dueDate') {
+      setDueDate(value)
+    } else if (name == 'amount') {
+      setAmount(value)
+    } else if (name == 'paymentLink') {
+      setPaymentLink(value)
+    } else if (name == 'paymentHints') {
+      setPaymentHints(value)
+    } else if (name == 'autoPay') {
+      setAutoPay(value)
+    } else if (name == 'paymentStatus') {
+      setPaymentStatus(value)
+    } else {
+      setValueState(value)
+    }
+    
+    console.log("handleChange", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+
   };
 
   const handleBoolean = (bool) => {
@@ -123,74 +190,151 @@ export default function BillsForm({billObject, category}) {
       return ""
     }
   }
+
+  const handleDateTwoDigits = (num) => {
+    if (num < 10) {
+      return '0' + num
+    } else {
+      return num
+    }
+  }
+
+  const handleDateOutput = (unix) => {
+    let aDate = Math.floor(unix)
+    let a = new Date(aDate),
+      year = a.getFullYear(),
+      months = ['1','2','3','4','5','6','7','8','9','10','11','12'],
+      month = months[a.getMonth()],
+      date = a.getDate()
+
+    const dateFormat = `${year}-${handleDateTwoDigits(month)}-${handleDateTwoDigits(date)}` 
+    return dateFormat
+  }
+
+  const handleMoneyDisplay = (amount) => {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+        });
+    return formatter.format(amount)
+  }
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>
-          <FormControl className={classes.formControl} key={billObject[0].category} onChange={handleChange}>
+        <form noValidate autoComplete="off" value={valueState} onSubmit={handleFormSubmit} onChange={handleChange}>
+          <FormControl className={classes.formControl} key={billObject[0].category} >
             <TextField
-              id="standard"
+              id="categoryField"
               label="Category"
-              defaultValue={billObject[0].category || ''}
+              // defaultValue={billObject[0].category}
+              value={categoryState }
               name="category"
+              onChange={handleChange}
             />
           </FormControl>
               
-          <FormControl className={classes.formControl} key={billObject[0].description} onChange={handleChange}>
+          <FormControl className={classes.formControl} key={billObject[0].description}>
             <TextField
-              id="standard"
+              id="descriptionField"
               label="Description"
-              defaultValue={billObject[0].description || ''}
+              // defaultValue={billObject[0].description}
+              value={descriptionState}
               name="description"
               helperText="i.e. Company Name, Account Name"
+              onChange={handleChange}
             />
           </FormControl>
               
-          <FormControl className={classes.formControl} key={billObject[0].dueDate} onChange={handleChange}>
+          <FormControl className={classes.formControl} key={billObject[0].dueDate}>
             <TextField
               id="date"
               label="Due Date"
               type="date"
               name="dueDate"
-              defaultValue={billObject[0].dueDate || ''}
+              // defaultValue={handleDateOutput(billObject[0].dueDate) || ''}
+              value={dueDateState}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
           </FormControl>
 
           <FormControl className={classes.formControl} key={billObject[0].amount} onChange={handleChange}>
-            <TextField id="standard" label="Amount Due" defaultValue={billObject[0].amount || ''} />
+            <TextField
+              id="amountField"
+              label="Amount Due" 
+              name="amount"
+              // defaultValue={billObject[0].amount || ''} 
+              value={amountState}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AttachMoneyIcon />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={handleChange}
+            />
           </FormControl>
 
-          <FormControl className={classes.formControl} key={billObject[0].paymentLink} onChange={handleChange}>
-            <TextField id="standard" label="Payment Link" defaultValue={billObject[0].paymentLink || ''}/>
+          <FormControl className={classes.formControl} key={billObject[0].paymentLink} >
+            <TextField
+              id="paymentLinkField"
+              label="Payment Link"
+              name="paymentLink"
+              // defaultValue={billObject[0].paymentLink || ''}
+              value={paymentLinkState}
+              onChange={handleChange}
+            />
           </FormControl>
 
-          <FormControl className={classes.formControl} key={billObject[0].paymentHints} onChange={handleChange}>
-            <TextField id="standard" label="Payment Hints" defaultValue={billObject[0].paymentHints || ''} helperText="i.e. Associated Payment Account, Log In Hints"/>
+          <FormControl className={classes.formControl} key={billObject[0].paymentHints} >
+            <TextField
+              id="paymentHintsField"
+              label="Payment Hints" 
+              // defaultValue={billObject[0].paymentHints || ''} 
+              name="paymentHints"
+
+              value={paymentHintsState}
+              helperText="i.e. Associated Payment Account, Log In Hints"
+              onChange={handleChange}
+            />
           </FormControl>
 
-          <FormControl variant="outlined" className={classes.formControl} key={billObject[0].autoPay} onChange={handleChange}>
-            <InputLabel id="demo-simple-select-outlined-label">AutoPay</InputLabel>
+          <FormControl variant="outlined" className={classes.formControl} key='autoPay' >
+            <InputLabel id="simple-select-outlined-label">AutoPay</InputLabel>
             <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
+              labelId="simple-select-outlined-label"
+              id="simple-select-outlined"
+              name="autoPay"
+
+              // defaultValue={billObject[0].autoPay}
+              onChange={handleChange}
             >
-              <MenuItem value="false">No</MenuItem>
-              <MenuItem value="true">Yes</MenuItem>
+              <MenuItem value='false'>No</MenuItem>
+              <MenuItem value='true'>Yes</MenuItem>
+
+              {/* <MenuItem value={autoPayState = false}>No</MenuItem>
+              <MenuItem value={autoPayState = true}>Yes</MenuItem> */}
             </Select>
           </FormControl>
 
-          <FormControl variant="outlined" className={classes.formControl} key={billObject[0].paymentStatus} onChange={handleChange}>
+          <FormControl variant="outlined" className={classes.formControl} key='paymentStatus' >
             <InputLabel id="demo-simple-select-outlined-label">Payment Status</InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
+              name="paymentStatus"
+              // defaultValue={billObject[0].paymentStatus}
+              onChange={handleChange}
             >
-              <MenuItem value="false">Not Paid</MenuItem>
-              <MenuItem value="true">Paid</MenuItem>
+              <MenuItem value='false'>Not Paid</MenuItem>
+              <MenuItem value='true'>Paid</MenuItem>
+
+              {/* <MenuItem value={paymentStatusState = false}>Not Paid</MenuItem>
+              <MenuItem value={paymentStatusState = true}>Paid</MenuItem> */}
             </Select>
           </FormControl>
 
@@ -202,8 +346,8 @@ export default function BillsForm({billObject, category}) {
         <h3>Previous {category} Bill Information</h3>
         <List>                
           <ListItem className={classes.listItem}>Description: {billObject[0].description}</ListItem>
-          <ListItem className={classes.listItem}>Due Date: {billObject[0].dueDate}</ListItem>
-          <ListItem className={classes.listItem}>Amount: ${billObject[0].amount}</ListItem>
+          <ListItem className={classes.listItem}>Due Date: {billObject[0].dueDate ? handleDateOutput(billObject[0].dueDate): ''}</ListItem>
+          <ListItem className={classes.listItem}>Amount: {billObject[0].amount ? handleMoneyDisplay(billObject[0].amount) : ''}</ListItem>
           <ListItem className={classes.listItem}>Payment Link: {billObject[0].paymentLink}</ListItem>
           <ListItem className={classes.listItem}>Payment Hints: {billObject[0].paymentHints}</ListItem>
           <ListItem className={classes.listItem}>AutoPay: {handleBoolean(billObject[0].autoPay)}</ListItem>

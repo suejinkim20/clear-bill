@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const ADD_BILL = gql`
-    mutation addBill($category: String!, $description: String!, $dueDate: String!, $amount: Float!, $paymentLink: String!, $paymentHints: String!, $autoPay: Boolean!, $paymentStatus: Boolean!) {
+    mutation addBill($category: String, $description: String, $dueDate: String, $amount: Float, $paymentLink: String, $paymentHints: String, $autoPay: Boolean, $paymentStatus: Boolean) {
         addBill(category: $category, description: $description, dueDate: $dueDate, amount: $amount, paymentLink: $paymentLink, paymentHints: $paymentHints, autoPay: $autoPay, paymentStatus: $paymentStatus) {
         _id
         category

@@ -11,7 +11,7 @@ const resolvers = {
             return await User.find({}).populate('bills')
         },
         bills: async () => {
-            return Bill.find().sort({ dueDate: -1})
+            return Bill.find({}).sort({ dueDate: -1})
         },
         bill: async (parent, { billId }) => {
             return Bill.findOne({ _id: billId });
