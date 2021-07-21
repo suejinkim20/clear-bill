@@ -19,7 +19,6 @@ import Link from '@material-ui/core/Link'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import mockBills from '../mockdata';
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -30,6 +29,49 @@ const useRowStyles = makeStyles({
 
 });
 
+const useTableStyles = makeStyles((theme) => ({
+  table: {
+    padding: "30px"
+  }
+}));
+
+const handleBoolean = (bool) => {
+  if (bool == true) {
+    return "Yes"
+  } else if (bool == false){
+    return "No"
+  }else {
+    return ""
+  }
+}
+
+const handleDateTwoDigits = (num) => {
+  if (num < 10) {
+    return '0' + num
+  } else {
+    return num
+  }
+}
+
+const handleDateOutput = (unix) => {
+  let aDate = Math.floor(unix)
+  let a = new Date(aDate),
+    year = a.getFullYear(),
+    months = ['1','2','3','4','5','6','7','8','9','10','11','12'],
+    month = months[a.getMonth()],
+    date = a.getDate()
+
+  const dateFormat = `${year}-${handleDateTwoDigits(month)}-${handleDateTwoDigits(date)}` 
+  return dateFormat
+}
+
+const handleMoneyDisplay = (amount) => {
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+      });
+  return formatter.format(amount)
+}
 
 function Row(props) {
   const { row } = props;
@@ -47,9 +89,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.category}
         </TableCell>
-        <TableCell align="right">{row.dueDate}</TableCell>
-        <TableCell align="right">{row.amount}</TableCell>
-        <TableCell align="right">{row.paymentStatus}</TableCell>
+        <TableCell align="right">{handleDateOutput(row.dueDate)}</TableCell>
+        <TableCell align="right">{handleMoneyDisplay(row.amount)}</TableCell>
+        <TableCell align="right">{handleBoolean(row.paymentStatus)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -76,7 +118,7 @@ function Row(props) {
                       <TableCell align="right">{row.paymentHints}</TableCell>
                       <TableCell align="right">
                         {useRowStyles.amount}
-                        {row.autoPay}
+                        {handleBoolean(row.autoPay)}
                       </TableCell>
                     </TableRow>
                 </TableBody>
@@ -89,15 +131,16 @@ function Row(props) {
   );
 }
 
-
 export default function BillsTable(userData) {
 console.log(userData)
+const classes = useTableStyles()
+
 const userBills = userData.userData.bills
 console.log(userBills)
+
   return (
     <div>
-      
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={classes.table}>
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>

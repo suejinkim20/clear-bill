@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client';
 export default function AddBill() {
     const [category, setCategory] = React.useState('');
     const [billObject, setBillObject] = React.useState('electric')
-    
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     const { data: userData } = Auth.getProfile()
 
@@ -31,7 +31,8 @@ export default function AddBill() {
 
     return (
         <div>
-            <h1>Add Bill Page</h1>
+            <h1>Add a New Bill</h1>
+            <p>Select a category to fill the form with existing bill information, or simply begin typing in your new bill information.</p>
             <div>
                 <SideNav />
                 <CategoryField setCategory={setCategory} setBillObject={setBillObject} userData={profile}/>

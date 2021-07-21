@@ -18,6 +18,7 @@ import {
     Typography
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
+import CheckBoxTwoToneIcon from '@material-ui/icons/CheckBoxTwoTone';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 const drawerWidth = 240;
 
@@ -50,8 +51,13 @@ const useStylesDr = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: "10px",
+    margin: "10px"
   },
+  icon: {
+    padding: '5px 0px 0px 0px',
+    margin: '5px 0px 0px 0px',
+  }
 }));
 
 function ResponsiveDrawer(props) {
@@ -80,9 +86,9 @@ function ResponsiveDrawer(props) {
         <ListItem button key='addBill' component={Link} to="/addBill">
           <ListItemText primary='Add a New Bill' />
         </ListItem>
-        {/* <ListItem button key='manageBills' component={Link} to="/dashboard">
+        <ListItem button key='manageBills' component={Link} to="/manageBills">
           <ListItemText primary='Manage Bills' />
-        </ListItem> */}
+        </ListItem>
         <ListItem button key='billForecast' component={Link} to="/billForecast">
           <ListItemText primary='Bill Forecast' />
         </ListItem>
@@ -113,7 +119,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            ClearBill : Keep track of your bills and pay them on time
+            <CheckBoxTwoToneIcon className={classes.icon}/> ClearBill : Keep track of your bills and pay them on time
           </Typography>
         </Toolbar>
       </AppBar>

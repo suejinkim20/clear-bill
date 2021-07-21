@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddBill from './pages/AddBill';
 import BillForecast from './pages/BillForecast';
+import ManageBills from './pages/ManageBills';
 
 // Components
 import Nav from './components/Nav';
@@ -67,6 +68,9 @@ function App() {
                 </Route>
                 <Route path="/addBill">
                   <AddBill />
+                </Route>
+                <Route path="/manageBills">
+                  <ManageBills />
                 </Route>
                 <Route path="/billforecast">
                   <BillForecast />
