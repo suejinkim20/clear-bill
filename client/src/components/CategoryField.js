@@ -56,7 +56,6 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
           onChange={(e) => handleChange(e.target.value)}
           label="Category"
         >
-          <MenuItem value=""><em>Select Category</em></MenuItem>
           {uniqueCategory.map((catName) => (
             <MenuItem value={catName}>{catName}</MenuItem>
           ))}
