@@ -14,6 +14,7 @@ class AuthService {
     const decoded = decode(token);
     if (decoded.exp < Date.now() / 1000) {
       localStorage.removeItem('id_token');
+      window.location.assign('/login');
       return true;
     }
     return false;
@@ -30,7 +31,8 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    alert("You have been logged out. Thank you for using Clear Bills.")
+    window.location.assign('/login');
   }
 }
 
