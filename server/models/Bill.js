@@ -29,7 +29,12 @@ const billSchema = new Schema({
   },
   paymentStatus: {
     type: Boolean
+  },
+  billOwner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   }
+
 });
 
 const Bill = mongoose.model('Bill', billSchema);

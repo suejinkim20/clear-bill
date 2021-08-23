@@ -52,7 +52,7 @@ export default function Login(props) {
         const { data } = await login({
           variables: { ...formState },
         });
-  
+        console.log(data)
         Auth.login(data.login.token);
       } catch (e) {
         console.error(e);
@@ -67,45 +67,45 @@ export default function Login(props) {
 
   return (
     <div>
-    <br></br>
-    <br></br>
-    <Container maxWidth="sm">
-        <Card className={classes.card}>
-            <h1 className={classes.title}>Login to Clear Bill</h1>
-            <Box component="span" label="Login" className={classes.form}> 
-                <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>   
-                    <TextField
-                        id="outlined-basic"
-                        label="Email"
-                        variant="outlined"
-                        className={classes.inputBox}
-                        name="email"
-                        type="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Password"
-                        variant="outlined"
-                        className={classes.inputBox}
-                        name="password"
-                        type="password"
-                        value={formState.password}
-                        onChange={handleChange}
-                    />
-                    <Button variant="contained" color="primary" type="submit">
-                        Login
-                    </Button>
-                </form>
-                
-                <br></br>
-                <br></br>
-                <p>Don't have an account? Sign Up Here</p>
-                <Button variant="contained" href='/signup'>Sign Up</Button>
-            </Box>
-        </Card>
-    </Container>
+      <br></br>
+      <br></br>
+      <Container maxWidth="sm">
+          <Card className={classes.card}>
+              <h1 className={classes.title}>Login to Clear Bill</h1>
+              <Box component="span" label="Login" className={classes.form}> 
+                  <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>   
+                      <TextField
+                          id="outlined-basic"
+                          label="Email"
+                          variant="outlined"
+                          className={classes.inputBox}
+                          name="email"
+                          type="email"
+                          value={formState.email}
+                          onChange={handleChange}
+                      />
+                      <TextField
+                          id="outlined-basic"
+                          label="Password"
+                          variant="outlined"
+                          className={classes.inputBox}
+                          name="password"
+                          type="password"
+                          value={formState.password}
+                          onChange={handleChange}
+                      />
+                      <Button variant="contained" color="primary" type="submit">
+                          Login
+                      </Button>
+                  </form>
+                  
+                  <br></br>
+                  <br></br>
+                  <p>Don't have an account? Sign Up Here</p>
+                  <Button variant="contained" href='/signup'>Sign Up</Button>
+              </Box>
+          </Card>
+      </Container>
     </div>
     )
 }

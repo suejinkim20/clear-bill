@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 
 
 export default function Dashboard() {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
     const { data: userData } = Auth.getProfile()
 
     const {loading, data} = useQuery(QUERY_USER,

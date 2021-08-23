@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import Auth from '../utils/auth'
 
 export default function ManageBills () {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
     
     if(!token){
       return <Redirect to="/login" />;

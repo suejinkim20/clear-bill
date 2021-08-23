@@ -132,11 +132,11 @@ function Row(props) {
 }
 
 export default function BillsTable(userData) {
-console.log(userData)
+// console.log(userData)
 const classes = useTableStyles()
 
 const userBills = userData.userData.bills
-console.log(userBills)
+// console.log(userBills)
 
   return (
     <div>

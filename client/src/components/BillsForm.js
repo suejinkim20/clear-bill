@@ -3,18 +3,19 @@ import { useMutation } from '@apollo/client';
 import { ADD_BILL } from '../utils/mutations';
 import { QUERY_BILLS, QUERY_USER } from '../utils/queries';
 
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { 
+  Button, 
+  Card, 
+  FormControl, 
+  InputAdornment, 
+  InputLabel, 
+  List, 
+  ListItem, 
+  MenuItem, 
+  Select, 
+  TextField } from '@material-ui/core/';
 
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -93,8 +94,8 @@ export default function BillsForm({billObject, category}) {
 
   const [addBill, { error, data }] = useMutation(ADD_BILL, {
     update(cache, { data: { addBill } }) {
-      console.log(cache)
-      console.log(data)
+      // console.log(cache)
+      // console.log(data)
       try {
         const { bills } = cache.readQuery({ query: QUERY_BILLS })
 
@@ -107,9 +108,9 @@ export default function BillsForm({billObject, category}) {
       }
 
       const userVariable = cache.readQuery({ query: QUERY_USER });
-      console.log(userVariable)
+      // console.log(userVariable)
       const user = userVariable.user
-      console.log(user)
+      // console.log(user)
       cache.writeQuery({
         query: QUERY_USER,
         data: { user: { ...user, bills: [...user.bills, addBill] } },
@@ -121,9 +122,9 @@ export default function BillsForm({billObject, category}) {
     event.preventDefault()
 
     try {
-      console.log("event under handleFormSubmit", event)
-      console.log("state variables under handleFormSubmit", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
-      console.log("category", categoryState)
+      // console.log("event under handleFormSubmit", event)
+      // console.log("state variables under handleFormSubmit", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+      // console.log("category", categoryState)
       const data = await addBill({
         variables: {
           category: categoryState, 
@@ -136,8 +137,8 @@ export default function BillsForm({billObject, category}) {
           paymentStatus: JSON.parse(paymentStatusState)
         }
       })
-      console.log(data)
-      console.log("after awaiting addBill", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+      // console.log(data)
+      // console.log("after awaiting addBill", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
 
       // setCategory('')
       // setDescription('')
@@ -151,10 +152,12 @@ export default function BillsForm({billObject, category}) {
     } catch (error) {
       console.error(error)
     }
+
+    alert(`You have successfully added a bill to your ${categoryState} category.`)
   }
 
   const handleChange = (event) => {
-    console.log('target changed')
+    // console.log('target changed')
     const { name, value } = event.target;
 
     if (name == 'category') {
@@ -177,7 +180,7 @@ export default function BillsForm({billObject, category}) {
       setValueState(value)
     }
     
-    console.log("handleChange", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
+    // console.log("handleChange", categoryState, descriptionState, dueDateState, amountState, paymentLinkState, paymentHintsState, autoPayState, paymentStatusState)
 
   };
 
