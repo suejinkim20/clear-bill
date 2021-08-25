@@ -4,7 +4,7 @@ import CategoryField from '../components/CategoryField';
 import BillsForm from '../components/BillsForm';
 import { Redirect } from 'react-router-dom'
 import Auth from '../utils/auth'
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
 
@@ -15,19 +15,17 @@ export default function AddBill() {
     const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
     const { data: userData } = Auth.getProfile()
 
-    const {loading, data} = useQuery(QUERY_USER,
-        { variables: { profileId: userData._id },
-    });
-
-    const profile = data?.user || {};
+    // const {loading, data} = useQuery(QUERY_USER,
+    //     { variables: { profileId: userData._id },
+    // });
 
     if(!token){
       return <Redirect to="/login" />;
     }
     
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //   return <div>Loading...</div>;
+    // }
 
     return (
         <div>
@@ -35,8 +33,8 @@ export default function AddBill() {
             <p>Select a category to fill the form with existing bill information, or simply begin typing in your new bill information.</p>
             <div>
                 <SideNav />
-                <CategoryField setCategory={setCategory} setBillObject={setBillObject} userData={profile}/>
-                <BillsForm category={category} billObject={billObject} userData={profile}/>
+                <CategoryField setCategory={setCategory} setBillObject={setBillObject} userData={userData}/>
+                <BillsForm category={category} billObject={billObject} userData={userData}/>
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ const billSchema = new Schema({
     required: true,
     trim: true
   },
-  description: {
+  company: {
     type: String
   },
   dueDate: {
@@ -17,15 +17,6 @@ const billSchema = new Schema({
   amount : {
     type: Number,
     required: true,
-  },
-  paymentLink: {
-      type: String
-  },
-  paymentHints: {
-    type: String
-  },
-  autoPay: {
-    type: Boolean
   },
   paymentStatus: {
     type: Boolean

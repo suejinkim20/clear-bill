@@ -3,7 +3,7 @@ import SideNav from '../components/SideNav'
 import CategoryField from '../components/CategoryField';
 import { Redirect } from 'react-router-dom'
 import Auth from '../utils/auth'
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
 function ForecastedBill() {
@@ -21,7 +21,7 @@ export default function BillForecast () {
     const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
     const { data: userData } = Auth.getProfile()
 
-    const {loading, data} = useQuery(QUERY_USER,
+    const {loading, data} = useQuery(QUERY_ME,
         { variables: { profileId: userData._id },
     });
 

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CategoryField({setCategory, setBillObject, userData }) {
   const classes = useStyles();
 
-  const categoryData = userData.bills.map(({ category }) => category)
+  const categoryData = userData.bills ? userData.bills.map(({ category }) => category) : []
   const billsArray = userData.bills
 
   const uniqueCategoryFunction = (a) => {

@@ -1,49 +1,55 @@
 import { gql } from '@apollo/client'
 
 export const ADD_BILL = gql`
-    mutation addBill($category: String, $description: String, $dueDate: String, $amount: Float, $paymentLink: String, $paymentHints: String, $autoPay: Boolean, $paymentStatus: Boolean) {
-        addBill(category: $category, description: $description, dueDate: $dueDate, amount: $amount, paymentLink: $paymentLink, paymentHints: $paymentHints, autoPay: $autoPay, paymentStatus: $paymentStatus) {
+mutation addBill(
+    $category: String, 
+    $company: String, 
+    $dueDate: String, 
+    $amount: Float, 
+    $paymentStatus: Boolean
+    $billOwner: ID
+) {
+    addBill(
+        category: $category, 
+        company: $company, 
+        dueDate: $dueDate, 
+        amount: $amount, 
+        paymentStatus: $paymentStatus
+        billOwner: $billOwner
+    ) {
         _id
         category
-        description
+        company
         dueDate
         amount
-        paymentLink
-        paymentHints
-        autoPay
-        paymentStatus
+        billOwner {
+          email
         }
     }
+}
 `;
 
-export const REMOVE_BILL = gql`
-mutation removeBill($billId: Int!) {
-    removeBill(billId: $billId) {
+export const UPDATE_BILL = gql`
+mutation updateBill(
+    $category: String, 
+    $company: String, 
+    $dueDate: String, 
+    $amount: Float, 
+    $paymentStatus: Boolean
+) {
+    updateBill(
+        category: $category, 
+        company: $company, 
+        dueDate: $dueDate, 
+        amount: $amount, 
+        paymentStatus: $paymentStatus
+    ) {
     _id
-    billId
     }
 }
 `;
 
 
-export const BILLS_BY_CATEGORY = gql`
-mutation billsByCategory($category: String!, $amount: Float!) {
-    billsByCategory(category: $category, amount: $amount) {
-    _id
-    category
-    amount
-    }
-}
-`;
-
-export const MARK_BILL_PAID = gql`
-mutation markBillPaid($billId: Int!) {
-    markBillPaid(billId: $billId) {
-    _id
-    billId
-    }
-}
-`;
 
 export const ADD_USER = gql`
 mutation addUser($email: String!, $password: String!) {

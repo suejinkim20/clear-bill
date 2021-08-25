@@ -4,21 +4,31 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
     Query: {
-        user: async (parent, { profileId }) => {
-            console.log(parent, profileId)
-            return await User.findOne({ _id: profileId }).populate('bills');
+        me: async (parent, args, context) => {
+            if (context.user) {
+
+                const user = await User.findOne({ _id: context.user._id }).populate({
+                    path: 'bills',
+                    populate: {
+                        path: 'billOwner'
+                    }
+                });
+
+                return user;
+            } 
+            throw new AuthenticationError('Not Logged In');
         },
-        bills: async (parent, args, context) => {
+        myBills: async (parent, args, context) => {
             if (context.user) {
                 const userBills = await Bill.find({ billOwner: context.user._id }).populate({
                     path: 'billOwner',
                     populate: 'User'
-                }).sort({ dueDate: -1})
-                console.log(parent, args, context)
+                }).sort({ dueDate: -1 });
+                
                 return userBills;
-            }
 
-            throw new AuthenticationError('Not logged in')
+            }
+            throw new AuthenticationError('Not logged In!');
         },
         bill: async (parent, { billId }) => {
             const singleBill = await Bill.findOne({ _id: billId }).populate({
@@ -30,44 +40,71 @@ const resolvers = {
         },
     },
     Mutation: {
-        addBill: async (parent, { category, description, dueDate, amount, paymentLink, paymentHints, autoPay, paymentStatus }) => {
-            return Bill.create({ category, description, dueDate, amount, paymentLink, paymentHints, autoPay, paymentStatus })
+        addTestBill: async (parent, { category, company, dueDate, amount, paymentStatus, billOwner }) => {
+  
+            const bill = await Bill.create({ category, company, dueDate, amount, paymentStatus, billOwner });
+  
+            await User.findOneAndUpdate(
+                { _id: billOwner },
+                { $addToSet: { bills: bill._id } }
+              );
+
+            return bill;
         },
-        removeBill: async (parent, { billId }) => {
-            return Bill.findOneAndDelete({ _id: billId })
-        },
-        billsByCategory: async (parent, {category, amount}) => {
-            return Bill.find({category}).sort({ dueDate: -1})
-        },
-        markBillPaid: async (parent, { billId }) => {
-            return Bill.findByIdAndUpdate(
-                { _id: billId },
+        updateTestBill: async (parent, { _id, category, company, dueDate, amount, paymentStatus, billOwner }) => {
+        
+            const bill = await Bill.findOneAndUpdate(
+                { _id: _id }, 
+                { category, company, dueDate, amount, paymentStatus, billOwner },
                 { new: true }
-                )
+                );
+  
+            return bill;
+        },
+        addBill: async (parent, { category, company, dueDate, amount, paymentStatus }, context) => {
+            if (context.user) {
+                const bill = await Bill.create({ category, company, dueDate, amount, paymentStatus, ['billOwner']: context.user._id  });
+                
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { bills: bill._id } }
+                  );
+
+                return bill;
+            }
+            throw new AuthenticationError('Not Logged In')
+        },
+        updateBill: async (parent, { _id, category, company, dueDate, amount, paymentStatus }, context) => {
+        
+            if (context.user) {
+                const bill = await Bill.findOneAndUpdate(
+                    { _id: _id }, 
+                    { category, company, dueDate, amount, paymentStatus },
+                    { new: true }
+                    );
+      
+                return bill;
+            }
+            throw new AuthenticationError('Not Logged In')
         },
         addUser: async (parent, { email, password }) => {
             const user = await User.create({ email, password });
             const token = signToken(user);
             return { token, user };
-          },
+        },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
-                console.log('no user found')
               throw new AuthenticationError('Incorrect credentials');
             }
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
-                console.group('password incorrect')
-                console.log('user: ' + user + ', password: ' + password)
               throw new AuthenticationError('Incorrect credentials');
             }
             const token = signToken(user);
       
             return { token, user };
-          },
-    
-      
+        },
     }
 }
 module.exports = resolvers;
