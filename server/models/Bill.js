@@ -8,7 +8,7 @@ const billSchema = new Schema({
     required: true,
     trim: true
   },
-  description: {
+  company: {
     type: String
   },
   dueDate: {
@@ -18,18 +18,14 @@ const billSchema = new Schema({
     type: Number,
     required: true,
   },
-  paymentLink: {
-      type: String
-  },
-  paymentHints: {
-    type: String
-  },
-  autoPay: {
-    type: Boolean
-  },
   paymentStatus: {
     type: Boolean
+  },
+  billOwner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   }
+
 });
 
 const Bill = mongoose.model('Bill', billSchema);

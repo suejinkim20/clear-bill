@@ -1,5 +1,5 @@
-# Project 3: Clear Bill
-Group 11: Suejin, Stephanie, Taylor & Will
+# Clear Bills
+
 ## User Story
 As a user I want to keep track of my bills so that I can pay them on time and predict future bill amounts.
 ## Description

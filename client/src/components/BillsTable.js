@@ -1,7 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { handleBoolean, handleDateTwoDigits, handleDateOutput, handleMoneyDisplay } from '../utils/helpers'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -35,49 +33,11 @@ const useTableStyles = makeStyles((theme) => ({
   }
 }));
 
-const handleBoolean = (bool) => {
-  if (bool == true) {
-    return "Yes"
-  } else if (bool == false){
-    return "No"
-  }else {
-    return ""
-  }
-}
-
-const handleDateTwoDigits = (num) => {
-  if (num < 10) {
-    return '0' + num
-  } else {
-    return num
-  }
-}
-
-const handleDateOutput = (unix) => {
-  let aDate = Math.floor(unix)
-  let a = new Date(aDate),
-    year = a.getFullYear(),
-    months = ['1','2','3','4','5','6','7','8','9','10','11','12'],
-    month = months[a.getMonth()],
-    date = a.getDate()
-
-  const dateFormat = `${year}-${handleDateTwoDigits(month)}-${handleDateTwoDigits(date)}` 
-  return dateFormat
-}
-
-const handleMoneyDisplay = (amount) => {
-  var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-      });
-  return formatter.format(amount)
-}
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-
   return (
     <React.Fragment key={row.email}>
       <TableRow className={classes.root}>
@@ -89,6 +49,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.category}
         </TableCell>
+        <TableCell align="right">{row.company}</TableCell>
         <TableCell align="right">{handleDateOutput(row.dueDate)}</TableCell>
         <TableCell align="right">{handleMoneyDisplay(row.amount)}</TableCell>
         <TableCell align="right">{handleBoolean(row.paymentStatus)}</TableCell>
@@ -103,22 +64,14 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Company/Description</TableCell>
-                    <TableCell>Payment Link</TableCell>
-                    <TableCell align="right">Payment Hints</TableCell>
-                    <TableCell align="right">AutoPay?</TableCell>
+                    <TableCell>Due Date</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell align="right">Paid Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow key={row.category}>
                       <TableCell component="th" scope="row">
-                        {row.description}
-                      </TableCell>
-                      <TableCell><Link href={row.paymentLink} target="_blank">{row.paymentLink}</Link></TableCell>
-                      <TableCell align="right">{row.paymentHints}</TableCell>
-                      <TableCell align="right">
-                        {useRowStyles.amount}
-                        {handleBoolean(row.autoPay)}
                       </TableCell>
                     </TableRow>
                 </TableBody>
@@ -135,7 +88,7 @@ export default function BillsTable(userData) {
 console.log(userData)
 const classes = useTableStyles()
 
-const userBills = userData.userData.bills
+const userBills = userData.userData || []
 console.log(userBills)
 
   return (
@@ -146,6 +99,7 @@ console.log(userBills)
                   <TableRow>
                     <TableCell />
                     <TableCell>Bills</TableCell>
+                    <TableCell align="right">Company</TableCell>
                     <TableCell align="right">Due Date</TableCell>
                     <TableCell align="right">Amount</TableCell>
                     <TableCell align="right">Paid Status</TableCell>

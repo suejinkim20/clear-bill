@@ -18,9 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CategoryField({setCategory, setBillObject, userData }) {
   const classes = useStyles();
-
-  const categoryData = userData.bills.map(({ category }) => category)
-  const billsArray = userData.bills
+  const categoryData = userData ? userData.map(({ category }) => category) : []
+  const billsArray = userData 
 
   const uniqueCategoryFunction = (a) => {
     var seen = {};
@@ -38,7 +37,6 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
     const dataOutput = data.filter(function(bill) {
         return bill.category === selectedCategory
     })
-    // console.log(dataOutput)
     setBillObject(dataOutput)
   }
 
@@ -56,7 +54,6 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
           onChange={(e) => handleChange(e.target.value)}
           label="Category"
         >
-          <MenuItem value=""><em>Select Category</em></MenuItem>
           {uniqueCategory.map((catName) => (
             <MenuItem value={catName}>{catName}</MenuItem>
           ))}
