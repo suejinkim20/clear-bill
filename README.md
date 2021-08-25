@@ -12,7 +12,9 @@ Clear Bill is an application designed to help users organize and view all of the
 * Originial Group GitHub Repository: https://github.com/snbarnhouse/mvp_bill_tracker 
 * Originial Heroku Deployed Site: https://clear-bill.herokuapp.com/ 
 
-![clear-bill](https://user-images.githubusercontent.com/77131387/126240098-c3e719e1-1f98-4ca5-9c01-080ed888316b.png)
+![clear-bill-home](./assets/home.png)
+
+![clear-bill-addBill](./assets/addBill.png)
 
 ## User experience
 1. User signs up by using a form to create a new & unique account associated with their email address.
