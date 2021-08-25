@@ -38,7 +38,6 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  console.log(row)
   return (
     <React.Fragment key={row.email}>
       <TableRow className={classes.root}>
@@ -50,6 +49,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.category}
         </TableCell>
+        <TableCell align="right">{row.company}</TableCell>
         <TableCell align="right">{handleDateOutput(row.dueDate)}</TableCell>
         <TableCell align="right">{handleMoneyDisplay(row.amount)}</TableCell>
         <TableCell align="right">{handleBoolean(row.paymentStatus)}</TableCell>
@@ -64,16 +64,15 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Company/Description</TableCell>
-                    <TableCell>Payment Link</TableCell>
-                    <TableCell align="right">Payment Hints</TableCell>
-                    <TableCell align="right">AutoPay?</TableCell>
+                    <TableCell>Due Date</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell align="right">Paid Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow key={row.category}>
                       <TableCell component="th" scope="row">
-                        {row.company}
+                        
                       </TableCell>
                       
                     </TableRow>
@@ -102,6 +101,7 @@ console.log(userBills)
                   <TableRow>
                     <TableCell />
                     <TableCell>Bills</TableCell>
+                    <TableCell align="right">Company</TableCell>
                     <TableCell align="right">Due Date</TableCell>
                     <TableCell align="right">Amount</TableCell>
                     <TableCell align="right">Paid Status</TableCell>

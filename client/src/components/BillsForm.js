@@ -73,7 +73,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BillsForm({billObject, category, userData}) {
   const classes = useStyles();
-  // console.log(billObject)
+  console.log(category)
+  console.log(billObject)
+
   const [categoryState, setCategory] = useState('')
   const [companyState, setCompany] = useState('')
   const [dueDateState, setDueDate] = useState('')
@@ -100,7 +102,7 @@ export default function BillsForm({billObject, category, userData}) {
       const data = await addBill({
         variables: {
           category: categoryState, 
-          description: companyState, 
+          company: companyState, 
           dueDate: dueDateState, 
           amount: parseFloat(amountState), 
           paymentStatus: JSON.parse(paymentStatusState),
@@ -110,12 +112,14 @@ export default function BillsForm({billObject, category, userData}) {
       // console.log(data)
       // console.log("after awaiting addBill", categoryState, companyState, dueDateState, amountState, paymentStatusState)
 
-      // setCategory('')
-      // setCompany('')
-      // setDueDate('')
-      // setAmount('')
-      // setPaymentStatus('')
-      // setValueState('');
+      setCategory('')
+      setCompany('')
+      setDueDate('')
+      setAmount('')
+      setPaymentStatus('')
+      setValueState('');
+      
+      window.location.assign('/dashboard')
     } catch (error) {
       console.error(error)
     }
@@ -231,7 +235,7 @@ export default function BillsForm({billObject, category, userData}) {
       <Card className={classes.card}>
         <h3>Previous {category} Bill Information</h3>
         <List>                
-          <ListItem className={classes.listItem}>Description: {billObject[0].company}</ListItem>
+          <ListItem className={classes.listItem}>Company: {billObject[0].company}</ListItem>
           <ListItem className={classes.listItem}>Due Date: {billObject[0].dueDate ? handleDateOutput(billObject[0].dueDate): ''}</ListItem>
           <ListItem className={classes.listItem}>Amount: {billObject[0].amount ? handleMoneyDisplay(billObject[0].amount) : ''}</ListItem>
           <ListItem className={classes.listItem}>Payment Status: {handleBoolean(billObject[0].paymentStatus)}</ListItem>
