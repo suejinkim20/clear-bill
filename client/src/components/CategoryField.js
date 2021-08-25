@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CategoryField({setCategory, setBillObject, userData }) {
   const classes = useStyles();
-  console.log(userData)
   const categoryData = userData ? userData.map(({ category }) => category) : []
   const billsArray = userData 
 
@@ -38,7 +37,6 @@ export default function CategoryField({setCategory, setBillObject, userData }) {
     const dataOutput = data.filter(function(bill) {
         return bill.category === selectedCategory
     })
-    // console.log(dataOutput)
     setBillObject(dataOutput)
   }
 

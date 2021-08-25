@@ -72,9 +72,7 @@ function Row(props) {
                 <TableBody>
                     <TableRow key={row.category}>
                       <TableCell component="th" scope="row">
-                        
                       </TableCell>
-                      
                     </TableRow>
                 </TableBody>
               </Table>

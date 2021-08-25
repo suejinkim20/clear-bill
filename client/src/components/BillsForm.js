@@ -1,7 +1,6 @@
 import React, { useState }from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_BILL } from '../utils/mutations';
-import { QUERY_MY_BILLS, QUERY_ME } from '../utils/queries';
 import { handleBoolean, handleDateTwoDigits, handleDateOutput, handleMoneyDisplay } from '../utils/helpers'
 
 import { 
@@ -83,7 +82,6 @@ export default function BillsForm({billObject, category, userData}) {
   const [paymentStatusState, setPaymentStatus] = useState('')
   const [valueState, setValueState] = useState('');
   
-  // console.log(userData._id)
   // useEffect(() => setCategory(billObject[0].category), [valueState])
   // useEffect(() => setCompany(billObject[0].company), [valueState])
   // useEffect(() => setDueDate(billObject[0].dueDate), [valueState])
@@ -96,9 +94,6 @@ export default function BillsForm({billObject, category, userData}) {
     event.preventDefault()
 
     try {
-      // console.log("event under handleFormSubmit", event)
-      // console.log("state variables under handleFormSubmit", categoryState, companyState, dueDateState, amountState, paymentStatusState)
-      // console.log("category", categoryState)
       const data = await addBill({
         variables: {
           category: categoryState, 
@@ -109,8 +104,6 @@ export default function BillsForm({billObject, category, userData}) {
           billOwner: userData._id
         }
       })
-      // console.log(data)
-      // console.log("after awaiting addBill", categoryState, companyState, dueDateState, amountState, paymentStatusState)
 
       setCategory('')
       setCompany('')
@@ -118,7 +111,7 @@ export default function BillsForm({billObject, category, userData}) {
       setAmount('')
       setPaymentStatus('')
       setValueState('');
-      
+
       window.location.assign('/dashboard')
     } catch (error) {
       console.error(error)

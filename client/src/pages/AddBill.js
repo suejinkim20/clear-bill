@@ -13,12 +13,10 @@ export default function AddBill() {
     const [billObject, setBillObject] = React.useState('electric')
 
     const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
-    // const { data: userData } = Auth.getProfile()
 
     const {loading, data} = useQuery(QUERY_MY_BILLS);
 
     const userData = data?.myBills || {};
-    console.log(userData)
     if(!token){
       return <Redirect to="/login" />;
     }

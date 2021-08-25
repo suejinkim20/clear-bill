@@ -14,15 +14,10 @@ export default function BillForecast() {
     const [billObject, setBillObject] = React.useState('')
     
     const token = Auth.loggedIn() ? Auth.getToken() : window.location.assign('/login');
-    // const { data: userData } = Auth.getProfile()
 
     const {loading, data} = useQuery(QUERY_MY_BILLS);
 
     const userData = data?.myBills || {};
-    // console.log(userData)
-    console.log(billObject)
-    console.log(data)
-    console.log(category)
 
     if (loading) {
         return <div>Loading...</div>;
