@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link'
+import Badge from '@material-ui/core/Badge'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
@@ -38,6 +39,18 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+
+  const handleAlert = (a) => {
+    if (a === false) {
+      return "!"
+    } else {
+      return null
+    }
+  }
+  const defaultProps = {
+    color: 'secondary', 
+    children: handleBoolean(row.paymentStatus)
+  }
   return (
     <React.Fragment key={row.email}>
       <TableRow className={classes.root}>
@@ -52,7 +65,9 @@ function Row(props) {
         <TableCell align="right">{row.company}</TableCell>
         <TableCell align="right">{handleDateOutput(row.dueDate)}</TableCell>
         <TableCell align="right">{handleMoneyDisplay(row.amount)}</TableCell>
-        <TableCell align="right">{handleBoolean(row.paymentStatus)}</TableCell>
+        <TableCell align="right">
+          <Badge badgeContent={handleAlert(row.paymentStatus)} {...defaultProps}></Badge>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
